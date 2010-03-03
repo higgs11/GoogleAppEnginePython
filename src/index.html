@@ -1,0 +1,34 @@
+<html>
+ <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+    {% for control in controls %}              
+      <b>{{ control.name }}</b>: 
+      <form action="/toggle" method="post">
+      	<input type="hidden" name="toggleid" value={{ control.deviceid}}>      	
+        <div><input type="submit" value="Toggle"></div>
+      </form>
+      <blockquote>Device On: {{ control.onstate|escape }}</blockquote>
+      <blockquote>Power: {{ control.power|escape }} Watts</blockquote>
+      <blockquote>Device ID: {{ control.deviceid|escape }}</blockquote>    
+      {% if control.author %}
+        <blockquote>Author: {{ control.author|escape }}</blockquote>
+      {% endif %}              
+    {% endfor %}
+	
+	<BR>
+	<BR>
+	<BR>
+	<b>Add Outlet</b>:
+    <form action="/submit" method="post">
+      Name:<div><textarea name="name" rows="1" cols="60"></textarea></div>
+      ID:<div><textarea name="deviceid" rows="1" cols="60"></textarea></div>
+      State:<div><textarea name="onstate" rows="1" cols="60"></textarea></div>      
+      <div><input type="submit" value="Submit"></div>
+    </form>
+
+    <a href="{{ url }}">{{ url_linktext }}</a>
+
+  </body>
+</html>
