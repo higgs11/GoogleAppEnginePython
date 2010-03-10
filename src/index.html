@@ -7,7 +7,7 @@
       <b>{{ control.name }}</b>: 
       <form action="/toggle" method="post">
       	<input type="hidden" name="toggleid" value={{ control.deviceid}}>      	
-        <div><input type="submit" value="Toggle"></div>
+        <div><input type="submit" value="Switch"></div>
       </form>
       <blockquote>Device On: {{ control.onstate|escape }}</blockquote>
       <blockquote>Power: {{ control.power|escape }} Watts</blockquote>
