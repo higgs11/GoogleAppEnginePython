@@ -9,7 +9,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 class MainPage(webapp.RequestHandler):
     def get(self):
         controlmodules_query = ControlModule.all()
-        controls = controlmodules_query.fetch(10)
+        controls = controlmodules_query.fetch(10)        
 
         if users.get_current_user():
             url = users.create_logout_url(self.request.uri)
@@ -42,10 +42,7 @@ class Submit(webapp.RequestHandler):
             result.delete()
         
         onState = self.request.get('onstate')
-        if((onState == 'on') or (onState == 'true') or (onState == 'On') or (onState == 'True')):
-            contModule.onstate = True;
-        else:
-            contModule.onstate = False;
+        contModule.onstate = ((onState == 'on') or (onState == 'true') or (onState == 'On') or (onState == 'True'))
         
         contModule.put()
         self.redirect('/')
@@ -61,11 +58,7 @@ class Toggle(webapp.RequestHandler):
             result.put()
         
         self.redirect('/')        
-        
-
-               
-        
-
+  
 application = webapp.WSGIApplication(
                                      [('/', MainPage),
                                       ('/submit', Submit),
